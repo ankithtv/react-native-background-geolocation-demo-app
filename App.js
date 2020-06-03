@@ -17,9 +17,12 @@ const App = () => {
     (async () => {
       BackgroundGeolocation.onLocation((location) => {
         console.log(location);
-        fetch('http://192.168.43.45:3000/', { method: "POST", body: JSON.stringify(location) }).then((res) => res.json).then(res = {})
+        let header = new Headers();
+        header.append("Content-Type", "application/json");
+
+        fetch('http://192.168.0.103:3005/geo', { method: "POST", headers: header, body: JSON.stringify(location) }).then((res) => res.json).then(res = {})
       }, (err) => {
-        console.log(err)
+        console.log("ddddd",err);
       })
 
       await BackgroundGeolocation.setConfig({
